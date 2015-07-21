@@ -1,15 +1,29 @@
 Rails.application.routes.draw do
+  resources :microposts
+  root 'sessions#new'
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
+
+  #get 'sessions/new'
+
+  #get 'sessions/create'
+
+  #get 'sessions/destroy'
+
+  #resources :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-  root 'users#new'
+  # root 'welcome#index' 
+  
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
-
+  get '/signup', to: 'users#new'
+  get '/signin', to: 'sessions#new'
+  delete '/signout', to: 'sessions#destroy'
+  
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
